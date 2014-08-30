@@ -12,7 +12,12 @@ config.message = "Hi, I need some help, you can find me here "
 config.endMessage = " Please come quickly, or call the police"
 
 mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/my_database');
+if process.env.MONGOLAB_URI
+	mongostring = process.env.MONGOLAB_URI
+else
+	mongostring = 'mongodb://localhost/my_database'
+
+mongoose.connect('mongostring');
 
 twilioSchema = new mongoose.Schema({
 	uniqId: String
