@@ -17,7 +17,8 @@ if process.env.MONGOLAB_URI
 else
 	mongostring = 'mongodb://localhost/my_database'
 
-mongoose.connect('mongostring');
+mongoose.connect('mongodb://heroku_app29051557:n6e57l53hl14oa1385b5ev1lnd@ds049858.mongolab.com:49858/heroku_app29051557
+');
 
 twilioSchema = new mongoose.Schema({
 	uniqId: String
