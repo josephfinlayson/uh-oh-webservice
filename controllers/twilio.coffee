@@ -1,5 +1,8 @@
+try
+	config = require './config'
+catch e
+	config = {}
 
-config = require './config' || {}
 
 if config == {}
 	config.authToken == AUTH_TOKEN #heroku env var
