@@ -3,7 +3,7 @@ try
 catch e
 
 
-if !config.authToken
+if typeof config == 'undefined'
 	config = {}
 	config.authToken == process.env.AUTH_TOKEN #heroku env var
 	config.accountSid == process.env.ACCOUNT_SID #heroku env var
