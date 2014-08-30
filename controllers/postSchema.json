@@ -1,0 +1,5 @@
+{
+    "uniqId": "+447967965870", //preferably user number, if not any other unique ID
+    "gpsCoords": ["51.525341", "-0.1391107"], // lat / long
+    "numbersToCall": ["+447967965870", "+447966028061", "+447973822981"] //transmit as strings, with country code if posssible
+}
