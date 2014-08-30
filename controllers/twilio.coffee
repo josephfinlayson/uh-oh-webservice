@@ -11,13 +11,31 @@ if (typeof config == 'undefined')
 config.message = "Hi, I need some help, you can find me here "
 config.endMessage = " Please come quickly, or call the police"
 
+mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/my_database');
+
+twilioSchema = new mongoose.Schema({
+	uniqId: String
+	gpsCoords: Array
+	date: { type: Date, default: Date.now },
+})
+
+twilModel = mongoose.model('twilModel');
+
+
 client = require('twilio')(config.accountSid, config.authToken);
 
 
 
 saveDetails = (params) ->
 	# saveDetails
-
+	twilDetails = new twilModel(		{
+		uniqId: params.from.num
+		gpsCoords: params.gpsCoords
+	});
+	twilDetails.save((err, docs) ->
+	  console.log(err,docs)
+	);
 getGoogleMapsLink = (params) ->
 	"https://www.google.co.uk/maps/@#{params[0]},#{params[1]},17z"
 
@@ -28,14 +46,15 @@ createBody = (params) ->
 sendTheText = (params, cb) ->
 	console.log("sendingText")
 	console.log createBody(params)
-	client.messages.create({
-		body : createBody(params)
-		to: params.number
-		from: "+1 786-565-3629"
-	}, (err, msg) ->
-		console.log(err, msg)
-		cb({success: "text message successfully sent"})
-	)
+
+	# client.messages.create({
+	# 	body : createBody(params)
+	# 	to: params.number
+	# 	from: "+1 786-565-3629"
+	# }, (err, msg) ->
+	# 	console.log(err, msg)
+	# 	cb({success: "text message successfully sent"})
+	# )
 
 textFriends = (params, cb) ->
 	console.log(params.numbersToCall)
@@ -50,9 +69,8 @@ main = (req, res) ->
 
 	console.log(req.body);
 
-	if req.body.mode == 'emergency'
-		textFriends(req.body, cb)
-
+	# if req.body.mode == 'emergency'
+	textFriends(req.body, cb)
 	saveDetails(req.body)
 
 module.exports = main
