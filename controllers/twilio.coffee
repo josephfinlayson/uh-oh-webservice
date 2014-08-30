@@ -15,8 +15,7 @@ mongoose = require('mongoose');
 if !process.env.MONGOLAB_URI
 	mongostring = 'mongodb://localhost/my_database'
 else
-	mongostring = 'mongodb://heroku_app29051557:n6e57l53hl14oa1385b5ev1lnd@ds049858.mongolab.com:49858/heroku_app29051557
-'
+	mongostring = 'mongodb://heroku_app29051557:n6e57l53hl14oa1385b5ev1lnd@ds049858.mongolab.com:49858/heroku_app29051557'
 
 mongoose.connect(mongostring);
 
