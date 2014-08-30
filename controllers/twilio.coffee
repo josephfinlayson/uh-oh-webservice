@@ -1,10 +1,9 @@
 try
 	config = require './config'
 catch e
-	config = {}
 
 
-if config == {}
+if !config.authToken
 	config.authToken == AUTH_TOKEN #heroku env var
 	config.accountSid == ACCOUNT_SID #heroku env var
 
