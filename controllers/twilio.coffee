@@ -4,8 +4,8 @@ catch e
 
 
 if !config.authToken
-	config.authToken == AUTH_TOKEN #heroku env var
-	config.accountSid == ACCOUNT_SID #heroku env var
+	config.authToken == process.env.AUTH_TOKEN #heroku env var
+	config.accountSid == process.env.ACCOUNT_SID #heroku env var
 
 config.message = "Hi, I need some help, you can find me here "
 config.endMessage = " Please come quickly, or call the police"
