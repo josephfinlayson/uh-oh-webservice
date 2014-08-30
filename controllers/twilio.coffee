@@ -8,7 +8,6 @@ if (typeof config == 'undefined')
 	config.authToken = process.env.AUTH_TOKEN #heroku env var
 	config.accountSid = process.env.ACCOUNT_SID #heroku env var
 
-config.message = "Hi, I need some help, you can find me here "
 config.endMessage = " Please come quickly, or call the police"
 
 mongoose = require('mongoose');
@@ -26,11 +25,7 @@ twilioSchema = new mongoose.Schema({
 })
 
 twilModel = mongoose.model('twilModel');
-
-
 client = require('twilio')(config.accountSid, config.authToken);
-
-
 
 saveDetails = (params) ->
 	# saveDetails
@@ -44,9 +39,14 @@ saveDetails = (params) ->
 getGoogleMapsLink = (params) ->
 	"https://www.google.co.uk/maps/@#{params[0]},#{params[1]},17z"
 
+getMessage = (params) ->
+	console.log(params);
+	"Hi #{params.name}, it's #{params.from.name}. I really need your help, you can find me here"
+
 createBody = (params) ->
 	mapsLink = getGoogleMapsLink([params.gpsCoords[0], params.gpsCoords[1]])
-	messageBody = "#{config.message}  #{mapsLink} #{config.endMessage}"
+	message = getMessage(params)
+	messageBody = "#{message} #{mapsLink}. #{config.endMessage}"
 
 sendTheText = (params, cb) ->
 	console.log("sendingText")
@@ -64,7 +64,9 @@ sendTheText = (params, cb) ->
 textFriends = (params, cb) ->
 	console.log(params.numbersToCall)
 	params.numbersToCall.forEach((obj) ->
-		params.number = number.num
+		params.number = obj.num
+		params.name = obj.name
+
 		sendTheText(params, cb)
 	)
 
