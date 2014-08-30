@@ -1,13 +1,13 @@
 try
-	config = require './config'
+	config = require './config	'
 catch e
 
-
-if typeof config == 'undefined'
+if (typeof config == 'undefined')
 	config = {}
 	config.authToken == process.env.AUTH_TOKEN #heroku env var
 	config.accountSid == process.env.ACCOUNT_SID #heroku env var
 
+console.log( config)
 config.message = "Hi, I need some help, you can find me here "
 config.endMessage = " Please come quickly, or call the police"
 
