@@ -1,12 +1,12 @@
-try
-	config = require './config'
-catch e
-	console.log e
+# try
+# 	config = require './config'
+# catch e
+# 	console.log e
 
-if (typeof config == 'undefined')
-	config = {}
-	config.authToken = process.env.AUTH_TOKEN #heroku env var
-	config.accountSid = process.env.ACCOUNT_SID #heroku env var
+# if (typeof config == 'undefined')
+config = {}
+config.authToken = process.env.AUTH_TOKEN #heroku env var
+config.accountSid = process.env.ACCOUNT_SID #heroku env var
 
 console.log("!!!!!")
 console.log (process.env)
