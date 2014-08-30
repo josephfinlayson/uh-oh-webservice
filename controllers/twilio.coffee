@@ -4,6 +4,7 @@ catch e
 
 
 if !config.authToken
+	config = {}
 	config.authToken == process.env.AUTH_TOKEN #heroku env var
 	config.accountSid == process.env.ACCOUNT_SID #heroku env var
 
