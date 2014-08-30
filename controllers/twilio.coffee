@@ -1,15 +1,18 @@
 try
 	config = require './config'
 catch e
+	console.log e
 
 if (typeof config == 'undefined')
 	config = {}
 	config.authToken == process.env.AUTH_TOKEN #heroku env var
 	config.accountSid == process.env.ACCOUNT_SID #heroku env var
 
-console.log(" config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config")
+console.log("!!!!!")
+console.log (process.env)
+console.log("ooooo")
 console.log(config)
-console.log(" config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config config")
+console.log("???")
 
 config.message = "Hi, I need some help, you can find me here "
 config.endMessage = " Please come quickly, or call the police"
