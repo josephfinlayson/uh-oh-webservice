@@ -52,19 +52,19 @@ sendTheText = (params, cb) ->
 	console.log("sendingText")
 	console.log createBody(params)
 
-	# client.messages.create({
-	# 	body : createBody(params)
-	# 	to: params.number
-	# 	from: "+1 786-565-3629"
-	# }, (err, msg) ->
-	# 	console.log(err, msg)
-	# 	cb({success: "text message successfully sent"})
-	# )
+	client.messages.create({
+		body : createBody(params)
+		to: params.number
+		from: "+1 786-565-3629"
+	}, (err, msg) ->
+		console.log(err, msg)
+		cb({success: "text message successfully sent"})
+	)
 
 textFriends = (params, cb) ->
 	console.log(params.numbersToCall)
-	params.numbersToCall.forEach((number) ->
-		params.number = number
+	params.numbersToCall.forEach((obj) ->
+		params.number = number.num
 		sendTheText(params, cb)
 	)
 
