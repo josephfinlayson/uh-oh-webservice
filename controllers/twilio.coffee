@@ -12,13 +12,13 @@ config.message = "Hi, I need some help, you can find me here "
 config.endMessage = " Please come quickly, or call the police"
 
 mongoose = require('mongoose');
-if process.env.MONGOLAB_URI
-	mongostring = process.env.MONGOLAB_URI
-else
+if !process.env.MONGOLAB_URI
 	mongostring = 'mongodb://localhost/my_database'
+else
+	mongostring = 'mongodb://heroku_app29051557:n6e57l53hl14oa1385b5ev1lnd@ds049858.mongolab.com:49858/heroku_app29051557
+'
 
-mongoose.connect('mongodb://heroku_app29051557:n6e57l53hl14oa1385b5ev1lnd@ds049858.mongolab.com:49858/heroku_app29051557
-');
+mongoose.connect(mongostring);
 
 twilioSchema = new mongoose.Schema({
 	uniqId: String
