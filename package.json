@@ -16,6 +16,8 @@
     "mongodb": "^1.4.9",
     "mongoose": "^3.8.15",
     "morgan": "~1.1.1",
+    "request": "^2.40.0",
+    "request-json": "^0.4.11",
     "serve-favicon": "^2.0.1",
     "static-favicon": "~2.0.0-alpha",
     "twilio": "^1.7.0"

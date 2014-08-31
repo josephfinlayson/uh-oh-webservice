@@ -27,6 +27,8 @@ twilioSchema = new mongoose.Schema({
 
 twilModel = mongoose.model('twilModel');
 client = require('twilio')(config.accountSid, config.authToken);
+request = require 'request-json';
+
 
 saveDetails = (params) ->
 	# saveDetails
@@ -43,13 +45,11 @@ getGoogleMapsLink = (params) ->
 	"https://www.google.co.uk/maps/@#{params[0]},#{params[1]},17z"
 
 getMessage = (params) ->
-	console.log(params);
 	"Hi #{params.name}, it's #{params.from.name}. I really need your help, you can find me here"
 
 
 getOkMessage = (params) ->
-	console.log(params);
-	"Hi #{params.name}, it's #{params.from.name}. I really need your help, you can find me here"
+	"Hi #{params.name}, it's #{params.from.name}.I'm OK now! Thanks for your help"
 
 
 createBody = (params) ->
@@ -59,16 +59,18 @@ createBody = (params) ->
 
 
 createOKBody = (params) ->
-	mapsLink = getGoogleMapsLink([params.gpsCoords[0], params.gpsCoords[1]])
 	message = getOkMessage(params)
-	messageBody = "#{message} #{mapsLink}. #{config.endMessage}"
+	messageBody = "#{message}"
 
 sendTheText = (params, cb,ressendIt) ->
 	console.log("sendingText")
-	console.log createBody(params)
+	if params.mode == "ok"
+		message = createOKBody(params)
+	else
+		message = createBody(params)
 	try
 		client.messages.create({
-			body : createBody(params)
+			body : message
 			to: params.number
 			from: "+1 786-565-3629"
 		}, (err, msg) ->
@@ -79,7 +81,6 @@ sendTheText = (params, cb,ressendIt) ->
 	catch e
 
 textFriends = (params, cb) ->
-	console.log(params.numbersToCall)
 	params.numbersToCall.forEach((obj, index) ->
 		params.number = obj.num
 		params.name = obj.name
@@ -93,11 +94,25 @@ main = (req, res) ->
 	cb = (message) ->
 
 		res.send(200, message)
-
-	console.log(req.body);
-
 	# if req.body.mode == 'emergency'
 	textFriends(req.body, cb)
 	saveDetails(req.body)
+	panicksterReport(req.body)
+
+
+panicksterReport = (params) ->
+	console.log(params)
+	console.log("panicksterReportPARAMS")
+	obj  = {
+		lat: params.gpsCoords[0]
+		lng: params.gpsCoords[0]
+		message: "Automated #{params.mode} report from uh-oh"
+	}
+
+	ep = ""
+	request.post(ep, obj, (err,msg)->
+		console.log(err,msg)
+	)
+
 
 module.exports = main
