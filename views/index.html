@@ -33,23 +33,6 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js">
     </script>
     <script type="text/javascript">
-    function initialize() {
-        var mapOptions = {
-            center: new google.maps.LatLng(51.525341, -0.1391107),
-            zoom: 8
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-        var organiseData = function(data) {
-                data.forEach(function(obj) {
-                    var myLatlng = new google.maps.LatLng(obj.gpsCoords[0], obj.gpsCoords[1]);
-
-                    console.log(data)
-                })
-            }
-            // locations = $.get
-        $.getJSON('uhohDetails').then(organiseData)
-
-        google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="js/angular.min.js"></script>

@@ -35,6 +35,7 @@ saveDetails = (params) ->
 		gpsCoords: params.gpsCoords,
 		mode: params.mode
 	});
+
 	twilDetails.save((err, docs) ->
 	  console.log(err,docs)
 	);
@@ -50,30 +51,35 @@ createBody = (params) ->
 	message = getMessage(params)
 	messageBody = "#{message} #{mapsLink}. #{config.endMessage}"
 
-sendTheText = (params, cb) ->
+sendTheText = (params, cb,ressendIt) ->
 	console.log("sendingText")
 	console.log createBody(params)
-
-	client.messages.create({
-		body : createBody(params)
-		to: params.number
-		from: "+1 786-565-3629"
-	}, (err, msg) ->
-		console.log(err, msg)
-		cb({success: "text message successfully sent"})
-	)
+	try
+		client.messages.create({
+			body : createBody(params)
+			to: params.number
+			from: "+1 786-565-3629"
+		}, (err, msg) ->
+			console.log(err)
+			if (ressendIt)
+				cb({success: "text message successfully sent"})
+		)
+	catch e
 
 textFriends = (params, cb) ->
 	console.log(params.numbersToCall)
-	params.numbersToCall.forEach((obj) ->
+	params.numbersToCall.forEach((obj, index) ->
 		params.number = obj.num
 		params.name = obj.name
-
-		sendTheText(params, cb)
+		if (index+1 == params.numbersToCall.length)
+			console.log("last item of array")
+			ressendIt = true
+		sendTheText(params, cb, ressendIt)
 	)
 
 main = (req, res) ->
 	cb = (message) ->
+
 		res.send(200, message)
 
 	console.log(req.body);
