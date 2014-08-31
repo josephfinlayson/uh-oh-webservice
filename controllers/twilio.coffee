@@ -40,12 +40,10 @@ getGoogleMapsLink = (params) ->
 	"https://www.google.co.uk/maps/@#{params[0]},#{params[1]},17z"
 
 getMessage = (params) ->
-	"Hi #{params.name}, it's #{params.from.name}. I really need your help, you can find me here"
-
+	"Sent using the Uh-Oh app: Hi #{params.name}. This is #{params.from.name}, I'm feeling a bit worried about my safety and wanted to let you know where I am. If you don't receive a message shortly saying I'm safe please call me or alert someone. Thanks "
 
 getOkMessage = (params) ->
-	"Hi #{params.name}, it's #{params.from.name}.I'm OK now! Thanks for your help"
-
+	"Sent using the Uh-Oh app: Hi #{params.name}. It's #{params.from.name}, I'm feeling safe again now. Thanks for watching out for me - you can download the Uh-Oh app for iOS or Android and I'll watch out for you too!"
 
 createBody = (params) ->
 	mapsLink = getGoogleMapsLink([params.gpsCoords[0], params.gpsCoords[1]])
