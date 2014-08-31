@@ -109,7 +109,7 @@ panicksterReport = (params) ->
 	}
 
 	client.post('/incidents/report.json', obj, (err,msg)->
-		console.log(err,msg)
+		# console.log(err,msg)
 	)
 
 
