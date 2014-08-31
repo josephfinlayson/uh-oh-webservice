@@ -89,12 +89,13 @@ main = (req, res) ->
 	console.log("req.body")
 
 	cb = (message) ->
-
 		res.send(200, message)
-	# if req.body.mode == 'emergency'
-	textFriends(req.body, cb)
+
 	saveDetails(req.body)
 	panicksterReport(req.body)
+
+	if req.body.mode == 'emergency'
+		textFriends(req.body, cb)
 
 
 panicksterReport = (params) ->
