@@ -28,6 +28,7 @@ twilioSchema = new mongoose.Schema({
 twilModel = mongoose.model('twilModel');
 client = require('twilio')(config.accountSid, config.authToken);
 request = require 'request-json';
+client = request.newClient('http://mapster-panickster.herokuapp.com/');
 
 
 saveDetails = (params) ->
@@ -101,16 +102,13 @@ main = (req, res) ->
 
 
 panicksterReport = (params) ->
-	console.log(params)
-	console.log("panicksterReportPARAMS")
 	obj  = {
 		lat: params.gpsCoords[0]
-		lng: params.gpsCoords[0]
+		lng: params.gpsCoords[1]
 		message: "Automated #{params.mode} report from uh-oh"
 	}
 
-	ep = ""
-	request.post(ep, obj, (err,msg)->
+	client.post('/incidents/report.json', obj, (err,msg)->
 		console.log(err,msg)
 	)
 
