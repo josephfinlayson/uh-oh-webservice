@@ -6,6 +6,7 @@ function initialize() {
         zoom: 14
     };
     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    console.log(map);
     var organiseData = function(data) {
             var fakeData = JSON.parse(fake)
             var parsedFakeData = []

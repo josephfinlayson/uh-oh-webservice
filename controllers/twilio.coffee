@@ -48,8 +48,7 @@ getOkMessage = (params) ->
 createBody = (params) ->
 	mapsLink = getGoogleMapsLink([params.gpsCoords[0], params.gpsCoords[1]])
 	message = getMessage(params)
-	messageBody = "#{message} #{mapsLink}."
-
+	messageBody = "#{message} #{mapsLink}"
 
 createOKBody = (params) ->
 	message = getOkMessage(params)

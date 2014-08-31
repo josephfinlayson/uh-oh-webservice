@@ -14,9 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+
     <style type="text/css">
     html {
         height: 100%
@@ -26,13 +28,26 @@
         margin: 0;
         padding: 0
     }
+    #map-canvas-wrapper {
+        height: 100%;
+        width: 100%;
+    }
     #map-canvas {
-        height: 100%
+        height: 100%;
+        width: 100%;
+    }
+    #map-canvas img {
+        max-width: none;
+    }
+    html,
+    body,
+    .container,
+    .row,
+    .col-xs-8 {
+        height: 99%
     }
     </style>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8H-gi_9uwLtbBOROVQ4n18eeAO57h7L4">
-    </script>
-    <script type="text/javascript">
     </script>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     <script src="js/angular.min.js"></script>
@@ -40,15 +55,38 @@
 </head>
 
 <body>
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-8">-
+            <div class="google-map-canvas" id="map-canvas">
+                -</div>
+        </div>
+        <div class="col-xs-4" style="height:100%; overflow-y:auto;">
+            <p><b>Welcome to Uh-Oh, the app that helps reassure you when walking alone at night and alerts friends and family to your position if you are worried about your safety. </b>
+            </p>
 
-    <div id="map-canvas" />
-    <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+            <h4>How it works</h4>
+            <p>
+                Uh-Oh is designed to help keep you safe when you might be feeling vulnerable, particularly walking home alone at night.</p>
+            <p>After you first install Uh-Oh go to Settings where you can programme in the phone numbers of three of your friends or family who you would like to contact if you feel unsafe. The app then works by offering you two levels of service;</p>
+            <ol>
+                <li>1. Talk To Me: Select the amber speech icon and be guided through a simulated conversation while your GPS position is recorded – just in case something should happen. The idea of this is to keep you talking and calm, making any potential unfriendlies believe you are on the phone and therefore less of a target. Plus you get to learn some interesting LGBT factoids!</li>
+                <li>2. Call My Friends: Select the red call icon to directly alert and call three of your friends or family. When this option is selected the app will automatically send an sms message to all three of your listed friends and call your friends in turn until one answers. If they don't answer it will default to the Talk To Me simulated conversation.</li>
+            </ol>Once you are feeling safe again, you will be asked to use the Cancel, I’m Safe button in the app. This will hang-up the simulated call or, if you used the Call My Friends option, will send your friends a second sms message to confirm that you are now safe – we don’t want to leave them worrying about you!</p>
+            <h4>What data gets sent when I use the app?</h4>
+            <p>
+                Whenever you use Uh-Oh your phone will send your GPS position to our central server along with your phone number and the number of your friends. If you don’t select to Call My Friends, nothing will be done with this individual data and it will be cleansed from our database on a regular basis – we do keep it for a little bit, just in case!
+            </p>
+            <p>
+                The only information we retain are the co-ordinate positions where people have used the app, without any other unique identifiers. We then map these on an ongoing basis to highlight areas where users feel particularly vulnerable, so that they can be avoided or issues raised with local authorities. You can check out the latest map here</p>
+            <h4>About the app</h4>
+            <p>Uh-Oh was built as part of the InterTech and FaceBook LGBT+ 2014 'Make Stuff Better' hackathon in London. It was created in 24 hours (so there are a few feature enhancements we have yet to complete) by: Benno Ommerborn Joseph Finlayson Louise Franklin Justin King-Lacroix Richard Matheson Liudas Survila
 
-    <!-- Add your site or application content here -->
-    <p>Hello world! This is HTML5 Boilerplate.</p>
+            </p>
+        </div>
 
+    </div>
+    </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
     window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')
