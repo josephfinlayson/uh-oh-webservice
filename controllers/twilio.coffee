@@ -19,6 +19,7 @@ else
 mongoose.connect(mongostring);
 
 twilioSchema = new mongoose.Schema({
+	mode: String
 	uniqId: String
 	gpsCoords: Array
 	date: { type: Date, default: Date.now },
@@ -31,7 +32,8 @@ saveDetails = (params) ->
 	# saveDetails
 	twilDetails = new twilModel(		{
 		uniqId: params.from.num
-		gpsCoords: params.gpsCoords
+		gpsCoords: params.gpsCoords,
+		mode: params.mode
 	});
 	twilDetails.save((err, docs) ->
 	  console.log(err,docs)
