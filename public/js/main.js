@@ -25,7 +25,7 @@ function initialize() {
             // data.push(parsedFakeData);
             data.forEach(function(obj) {
                 var myLatlng = new google.maps.LatLng(obj.gpsCoords[0], obj.gpsCoords[1]);
-                if (typeof obj.mode == undefined) {
+                if (typeof obj.mode == 'undefined') {
                     obj.mode = "Alert"
                 }
                 var infowindow = new google.maps.InfoWindow({
