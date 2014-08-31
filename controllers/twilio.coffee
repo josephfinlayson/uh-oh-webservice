@@ -18,12 +18,6 @@ else
 
 mongoose.connect(mongostring);
 
-twilioSchema = new mongoose.Schema({
-	mode: String
-	uniqId: String
-	gpsCoords: Array
-	date: { type: Date, default: Date.now },
-})
 
 twilModel = mongoose.model('twilModel');
 client = require('twilio')(config.accountSid, config.authToken);
@@ -82,6 +76,7 @@ sendTheText = (params, cb,ressendIt) ->
 	catch e
 
 textFriends = (params, cb) ->
+
 	params.numbersToCall.forEach((obj, index) ->
 		params.number = obj.num
 		params.name = obj.name
@@ -92,6 +87,9 @@ textFriends = (params, cb) ->
 	)
 
 main = (req, res) ->
+	console.log(req.body)
+	console.log("req.body")
+
 	cb = (message) ->
 
 		res.send(200, message)

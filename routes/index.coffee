@@ -5,14 +5,13 @@ mongoose = require('mongoose');
 # mongoose.connect('mongodb://localhost/my_database');
 
 twilioSchema = new mongoose.Schema({
+	mode: String
 	uniqId: String
 	gpsCoords: Array
 	date: { type: Date, default: Date.now },
 })
 
 twilModel = mongoose.model('twilModel', twilioSchema);
-
-
 
 twilioController = require('../controllers/twilio')
 # GET home page.
