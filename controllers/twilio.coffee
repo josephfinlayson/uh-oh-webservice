@@ -22,7 +22,7 @@ mongoose.connect(mongostring);
 twilModel = mongoose.model('twilModel');
 client = require('twilio')(config.accountSid, config.authToken);
 request = require 'request-json';
-client = request.newClient('http://mapster-panickster.herokuapp.com/');
+mapsterClient = request.newClient('http://mapster-panickster.herokuapp.com/');
 
 
 saveDetails = (params) ->
@@ -63,6 +63,7 @@ sendTheText = (params, cb,ressendIt) ->
 		message = createOKBody(params)
 	else
 		message = createBody(params)
+
 	try
 		client.messages.create({
 			body : message
@@ -70,11 +71,11 @@ sendTheText = (params, cb,ressendIt) ->
 			from: "+1 786-565-3629"
 		}, (err, msg) ->
 			console.log(err)
-			if (ressendIt)
-				cb({success: "text message successfully sent"})
 		)
 	catch e
-
+		console.log e
+	if (ressendIt)
+		cb({success: "text message successfully sent"})
 textFriends = (params, cb) ->
 
 	params.numbersToCall.forEach((obj, index) ->
@@ -106,7 +107,7 @@ panicksterReport = (params) ->
 		message: "Automated #{params.mode} report from uh-oh"
 	}
 
-	client.post('/incidents/report.json', obj, (err,msg)->
+	mapsterClient.post('/incidents/report.json', obj, (err,msg)->
 		# console.log(err,msg)
 	)
 
