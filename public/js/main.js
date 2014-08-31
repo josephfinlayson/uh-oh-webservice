@@ -12,7 +12,6 @@ function initialize() {
             var i = 0
             fakeData.forEach(function(array) {
                 i++
-                console.log(i)
                 fakeObj = {}
                 fakeObj.gpsCoords = array;
                 fakeObj.mode = "Alert"
@@ -24,7 +23,6 @@ function initialize() {
             })
             // data.push(parsedFakeData);
             data.forEach(function(obj) {
-                console.log(obj.gpsCoords)
                 var myLatlng = new google.maps.LatLng(obj.gpsCoords[0], obj.gpsCoords[1]);
                 if (typeof obj.mode == undefined) {
                 	obj.mode = "Alert"
@@ -36,20 +34,22 @@ function initialize() {
 
                 if (obj.mode === 'Alert') {
                     pinColor = '660033'
-
                 }
                 var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
                     new google.maps.Size(21, 34),
                     new google.maps.Point(0, 0),
                     new google.maps.Point(10, 34))
 
+                console.log(myLatlng)
+                console.log("inserting image")
 
                 var marker = new google.maps.Marker({
                     position: myLatlng,
                     map: map,
                     title: "Incident Report",
-                    icon: pinImage
+                    // icon: pinImage
                 });
+
                 google.maps.event.addListener(marker, 'click', function() {
                     infowindow.open(map, marker);
                 });
