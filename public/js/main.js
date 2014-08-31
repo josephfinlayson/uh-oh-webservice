@@ -47,7 +47,7 @@ function initialize() {
                     position: myLatlng,
                     map: map,
                     title: "Incident Report",
-                    // icon: pinImage
+                    icon: pinImage
                 });
 
                 google.maps.event.addListener(marker, 'click', function() {
