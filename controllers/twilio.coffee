@@ -46,9 +46,21 @@ getMessage = (params) ->
 	console.log(params);
 	"Hi #{params.name}, it's #{params.from.name}. I really need your help, you can find me here"
 
+
+getOkMessage = (params) ->
+	console.log(params);
+	"Hi #{params.name}, it's #{params.from.name}. I really need your help, you can find me here"
+
+
 createBody = (params) ->
 	mapsLink = getGoogleMapsLink([params.gpsCoords[0], params.gpsCoords[1]])
 	message = getMessage(params)
+	messageBody = "#{message} #{mapsLink}. #{config.endMessage}"
+
+
+createOKBody = (params) ->
+	mapsLink = getGoogleMapsLink([params.gpsCoords[0], params.gpsCoords[1]])
+	message = getOkMessage(params)
 	messageBody = "#{message} #{mapsLink}. #{config.endMessage}"
 
 sendTheText = (params, cb,ressendIt) ->

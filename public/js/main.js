@@ -25,21 +25,26 @@ function initialize() {
             data.forEach(function(obj) {
                 var myLatlng = new google.maps.LatLng(obj.gpsCoords[0], obj.gpsCoords[1]);
                 if (typeof obj.mode == undefined) {
-                	obj.mode = "Alert"
+                    obj.mode = "Alert"
                 }
                 var infowindow = new google.maps.InfoWindow({
                     content: '<h1>' + obj.mode + '</h1>'
                 });
-                var pinColor = 'FF00FF'
 
+                image = 'img/help.png'
                 if (obj.mode === 'Alert') {
-                    pinColor = '660033'
+                    image = 'img/chat.png'
                 }
-                var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=.|" + pinColor,
-                    new google.maps.Size(21, 34),
-                    new google.maps.Point(0, 0),
-                    new google.maps.Point(10, 34))
 
+                image = {
+                    url: image,
+                    // size: new google.maps.Size(20, 32),
+                    // The origin for this image is 0,0.
+                    origin: new google.maps.Point(0, 0),
+                    // The anchor for this image is the base of the flagpole at 0,32.
+                    anchor: new google.maps.Point(0, 32),
+                    scaledSize: new google.maps.Size(30, 30)
+                }
                 console.log(myLatlng)
                 console.log("inserting image")
 
@@ -47,7 +52,7 @@ function initialize() {
                     position: myLatlng,
                     map: map,
                     title: "Incident Report",
-                    icon: pinImage
+                    icon: image
                 });
 
                 google.maps.event.addListener(marker, 'click', function() {
